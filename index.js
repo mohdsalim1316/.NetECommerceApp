@@ -208,6 +208,9 @@ router.delete('/accounts/:user', (req, res) => {
   });
   
 // ***************************************************************************
+const imageUrl = process.env.BLOB_URL + 'my-image.jpg';
+
+
 
 // Add 'api` prefix to all routes
 app.use(apiPrefix, router);
