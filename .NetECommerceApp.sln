@@ -1,0 +1,29 @@
+name: .NET Build & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x  # or whatever version you use
+
+      - name: Restore NuGet packages
+        run: dotnet restore .NetECommerceApp.sln  # adjust if your .sln file is elsewhere
+
+      - name: Build
+        run: dotnet build .NetECommerceApp.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test .NetECommerceApp.sln --no-build --verbosity normal
